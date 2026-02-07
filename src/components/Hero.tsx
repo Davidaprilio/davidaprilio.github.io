@@ -1,6 +1,9 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { profile } from '../consts/profile';
+
+gsap.registerPlugin(ScrollTrigger);
 import AbstractBg from './AbstractBg';
 import TimeWalkZone from './TimeWalkZone';
 
@@ -59,6 +62,22 @@ export default function Hero() {
         duration: 1.5,
         ease: 'sine.inOut',
       });
+
+      // ── Parallax: Hero scrolls SLOW (content lags behind) ──
+      const heroContent = sectionRef.current?.querySelector('.hero-content');
+      if (heroContent) {
+        gsap.to(heroContent, {
+          y: () => window.innerHeight * 0.50,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 0,
+          },
+        });
+      }
+
     }, sectionRef);
 
     return () => ctx.revert();
@@ -76,7 +95,7 @@ export default function Hero() {
       {/* Background subtle gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-bg via-bg to-bg-light opacity-50" />
 
-      <div className="relative z-10">
+      <div className="hero-content relative z-10">
         <div className="relative mb-6">
           <div>
             <div
@@ -129,7 +148,7 @@ export default function Hero() {
         ref={scrollIndicatorRef}
         className="absolute bottom-10 left-1/2 -translate-x-1/2"
       >
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex flex-col items-center gap-2 relative">
           <span className="font-mono text-[10px] tracking-[0.3em] text-text-muted uppercase">
             Scroll
           </span>

@@ -87,6 +87,26 @@ export default function About() {
                     }
                 );
             });
+
+            // ── Parallax: About scrolls FAST (rises up over Hero) ──
+            const aboutContent = sectionRef.current?.querySelector('.about-content');
+            if (aboutContent) {
+              gsap.fromTo(
+                aboutContent,
+                { y: 120 },
+                {
+                  y: 0,
+                  ease: 'none',
+                  scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: 'top bottom',
+                    end: 'top 30%',
+                    scrub: 0,
+                  },
+                }
+              );
+            }
+
         }, sectionRef);
 
         return () => ctx.revert();
@@ -97,9 +117,9 @@ export default function About() {
         <section
             id="about"
             ref={sectionRef}
-            className="relative px-6 py-32 md:px-12 lg:px-24"
+            className="relative z-10 bg-bg px-6 py-32 md:px-12 lg:px-24"
         >
-            <div className="mx-auto max-w-7xl">
+            <div className="about-content mx-auto max-w-7xl">
                 {/* Section Label */}
                 <div className="mb-4 font-mono text-xs tracking-[0.3em] text-text-muted uppercase">
                     <span className="text-accent">01</span> — About
