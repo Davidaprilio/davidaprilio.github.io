@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { profile } from '../consts/profile';
+import TimeWalkZone from './TimeWalkZone';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -100,9 +101,9 @@ export default function Contact() {
           </h2>
         </div>
 
-        <div ref={ctaRef} className="mb-20">
+        <div ref={ctaRef} className="mb-20 flex items-end justify-between">
           <a
-            href={`mailto:${profile.name}`}
+            href={`mailto:${profile.email}`}
             className="magnetic-btn group inline-flex items-center gap-4 rounded-full border border-border-light px-10 py-5 transition-all duration-300 hover:border-accent hover:bg-accent hover:text-bg"
           >
             <span className="text-lg font-light tracking-wider uppercase">
@@ -122,6 +123,12 @@ export default function Contact() {
               />
             </svg>
           </a>
+
+          {/* show timezone */}
+          <div className='text-text-muted'>
+            <div>TZ {profile.timeZone}</div>
+            <div className='text-right'><TimeWalkZone timeZone={profile.timeZone} second label={false} /></div>
+          </div>
         </div>
 
         <div ref={linksRef} className="border-t border-border-light pt-8">

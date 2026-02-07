@@ -11,6 +11,7 @@ export const profile = {
         linkedin: 'https://www.linkedin.com/in/david-aprilio',
         instagram: 'https://instagram.com/david.arl_',
     },
+    updateYear: 2026,
 } as const;
 
 

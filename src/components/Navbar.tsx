@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { profile } from '../consts/profile';
 
 const NAV_LINKS = [
-    { label: 'Home', href: '#hero' },
-    { label: 'About', href: '#about' },
-    { label: 'Work', href: '#projects' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Home', href: '/', isRoute: true },
+    { label: 'About', href: '#about', isRoute: false },
+    { label: 'Work', href: '/project', isRoute: true },
+    { label: 'Contact', href: '#contact', isRoute: false },
 ];
 
 export default function Navbar() {
@@ -15,7 +16,7 @@ export default function Navbar() {
     const navRef = useRef<HTMLElement>(null);
     const overlayRef = useRef<HTMLDivElement>(null);
     const lastScrollY = useRef(0);
-    const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+    const linkRefs = useRef<(HTMLAnchorElement | HTMLElement | null)[]>([]);
 
     // Hide navbar on scroll down, show on scroll up
     useEffect(() => {
@@ -66,15 +67,15 @@ export default function Navbar() {
                 style={{ mixBlendMode: menuOpen ? 'normal' : undefined }}
             >
                 {/* Glassmorphism background */}
-                <div className="pointer-events-none absolute inset-0 border-none bg-bg/40 backdrop-blur-md" style={{ maskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)' }} />
-                <a
-                    href="#hero"
+                <div className="pointer-events-none absolute top-0 left-0 right-0 -bottom-10 border-none bg-bg/40 backdrop-blur-md" style={{ maskImage: 'linear-gradient(to bottom, black 50%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 50%, transparent 100%)' }} />
+                <Link
+                    to="/"
                     className="text-lg font-bold tracking-widest text-text uppercase relative"
                 >
                     {profile.name}<span className="text-accent capitalize"> .Portofolio</span>
                     {/* Decorative corner */}
-                    <div className="font-mono text-xs text-text-muted">&copy; 2026</div>
-                </a>
+                    <div className="font-mono text-xs text-text-muted -mt-1.5 mb-1.5">&copy; {profile.updateYear}</div>
+                </Link>
 
                 <button
                     onClick={() => setMenuOpen(!menuOpen)}
@@ -100,18 +101,33 @@ export default function Navbar() {
             >
                 <div className="flex flex-col items-center gap-8">
                     {NAV_LINKS.map((link, i) => (
-                        <a
-                            key={link.label}
-                            ref={(el) => { linkRefs.current[i] = el; }}
-                            href={link.href}
-                            onClick={handleLinkClick}
-                            className="group relative text-5xl font-light tracking-tight text-text transition-colors duration-300 hover:text-accent md:text-7xl"
-                        >
-                            <span className="font-mono text-sm text-text-muted mr-4">
-                                0{i + 1}
-                            </span>
-                            {link.label}
-                        </a>
+                        link.isRoute ? (
+                            <Link
+                                key={link.label}
+                                ref={(el) => { linkRefs.current[i] = el; }}
+                                to={link.href}
+                                onClick={handleLinkClick}
+                                className="group relative text-5xl font-light tracking-tight text-text transition-colors duration-300 hover:text-accent md:text-7xl"
+                            >
+                                <span className="font-mono text-sm text-text-muted mr-4">
+                                    0{i + 1}
+                                </span>
+                                {link.label}
+                            </Link>
+                        ) : (
+                            <a
+                                key={link.label}
+                                ref={(el) => { linkRefs.current[i] = el; }}
+                                href={link.href}
+                                onClick={handleLinkClick}
+                                className="group relative text-5xl font-light tracking-tight text-text transition-colors duration-300 hover:text-accent md:text-7xl"
+                            >
+                                <span className="font-mono text-sm text-text-muted mr-4">
+                                    0{i + 1}
+                                </span>
+                                {link.label}
+                            </a>
+                        )
                     ))}
                 </div>
 

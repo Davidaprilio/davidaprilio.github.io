@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { projects, type Project } from '../consts/projects';
@@ -178,6 +179,31 @@ export default function Projects() {
           {projects.map((project, i) => (
             <ProjectCard key={project.title} project={project} index={i} />
           ))}
+        </div>
+
+        {/* View All Projects link */}
+        <div className="mt-16 flex justify-center">
+          <Link
+            to="/project"
+            className="group inline-flex items-center gap-3 rounded-full border border-border-light px-8 py-4 font-mono text-sm tracking-wider text-text-muted uppercase transition-all duration-300 hover:border-accent hover:text-accent"
+          >
+            View All Projects
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              className="transition-transform group-hover:translate-x-1"
+            >
+              <path
+                d="M3 8H13M13 8L9 4M13 8L9 12"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>

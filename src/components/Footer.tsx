@@ -6,7 +6,7 @@ export default function Footer() {
         <div className="mx-auto max-w-7xl px-6 pt-8 md:px-12 lg:px-24">
             <div className="flex flex-col items-center justify-between gap-4 border-t border-border-light pt-8 md:flex-row">
                 <p className="font-mono text-xs tracking-wider text-text-muted">
-                &copy; 2026 {profile.name}. All rights reserved.
+                &copy; {profile.updateYear} {profile.name}. All rights reserved.
                 </p>
                 <p className="font-mono text-xs tracking-wider text-text-muted">
                 Designed & Built with <span className="text-accent">♥</span>

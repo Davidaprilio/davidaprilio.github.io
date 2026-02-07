@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Preloader from './components/Preloader';
 import CustomCursor from './components/CustomCursor';
@@ -10,6 +11,20 @@ import Marquee from './components/Marquee';
 import Services from './components/Services';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import ProjectsPage from './pages/ProjectsPage';
+
+function HomePage() {
+  return (
+    <main>
+      <Hero />
+      <About />
+      <Projects />
+      <Marquee />
+      <Services />
+      <Contact />
+    </main>
+  );
+}
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -23,14 +38,10 @@ function App() {
       {loading && <Preloader onComplete={handlePreloaderComplete} />}
       <CustomCursor />
       <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Projects />
-        <Marquee />
-        <Services />
-        <Contact />
-      </main>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/project" element={<ProjectsPage />} />
+      </Routes>
       <Footer />
     </>
   );

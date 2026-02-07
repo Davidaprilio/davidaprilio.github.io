@@ -170,3 +170,19 @@ a, button {
   padding-bottom: 0;
   margin-bottom: -0.06em; /* pull descenders flush to bottom edge */
 }
+
+/* ── Lazy Image Shimmer ── */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.lazy-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 50%,
+    transparent 100%
+  );
+  animation: shimmer 1.5s ease-in-out infinite;
+}
