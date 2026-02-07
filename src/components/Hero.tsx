@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { profile } from '../consts/profile';
+import AbstractBg from './AbstractBg';
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -20,9 +21,17 @@ export default function Hero() {
 
       // Animate heading lines
       tl.fromTo(
-        [imgRef.current, line1Ref.current, line2Ref.current, line3Ref.current],
+        [line1Ref.current, line2Ref.current, line3Ref.current],
         { y: '100%', opacity: 0 },
         { y: '0%', opacity: 1, stagger: 0.15, duration: 1.2, delay: 0.3 }
+      );
+
+      // Animate image separately (fade + scale)
+      tl.fromTo(
+        imgRef.current,
+        { scale: 0.8, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 1, ease: 'power3.out' },
+        '-=1'
       );
 
       // Animate subtitle
@@ -60,12 +69,15 @@ export default function Hero() {
       ref={sectionRef}
       className="relative flex min-h-screen flex-col justify-center overflow-hidden px-6 md:px-12 lg:px-24"
     >
+      {/* Abstract animated background */}
+      <AbstractBg />
+
       {/* Background subtle gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-bg via-bg to-bg-light opacity-50" />
 
       <div className="relative z-10">
-        <div className="mb-6">
-          <div className="">
+        <div className="relative mb-6">
+          <div>
             <div
               ref={line1Ref}
               className="text-[clamp(2.5rem,8vw,8rem)] font-extralight leading-[0.95] tracking-tight"
@@ -73,7 +85,7 @@ export default function Hero() {
                 Hello, I'm <span className="text-accent">{profile.name}</span>
             </div>
           </div>
-          <div className="">
+          <div>
             <div
               ref={line2Ref}
               className="text-[clamp(2.5rem,8vw,8rem)] font-extralight leading-[0.95] tracking-tight"
@@ -81,7 +93,7 @@ export default function Hero() {
               <span className="italic font-light text-accent">Full-Stack</span>
             </div>
           </div>
-          <div className="">
+          <div>
             <div
               ref={line3Ref}
               className="text-[clamp(2.5rem,8vw,8rem)] font-extralight leading-[0.95] tracking-tight ml-40"
@@ -90,11 +102,16 @@ export default function Hero() {
             </div>
           </div>
 
-          <img ref={imgRef} src="/photo.jpg" alt="my photo" className="absolute top-0 right-0 size-96 mr-30 object-cover rounded-full" />
+          <img
+            ref={imgRef}
+            src="/photo.jpg"
+            alt="my photo"
+            className="hidden md:block absolute top-1/2 right-0 -translate-y-1/2 size-80 lg:size-96 object-cover rounded-full"
+          />
         </div>
 
         <div ref={subRef} className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <p className="max-w-md text-base font-light leading-relaxed text-text-muted md:text-lg pt-40">
+          <p className="max-w-md text-base font-light leading-relaxed text-text-muted md:text-lg pt-8">
             Welcome to my portfolio!. Let's explore.
             <br />
             <span className="text-text">Building serious projects with love</span>
