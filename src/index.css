@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+/* ── Custom Theme ── */
+@theme {
+  --color-bg: #0a0a0a;
+  --color-bg-light: #111111;
+  --color-bg-card: #1a1a1a;
+  --color-text: #f5f5f0;
+  --color-text-muted: #888888;
+  --color-accent: #c5fb45;
+  --color-accent-hover: #d4ff66;
+  --color-border: #222222;
+  --color-border-light: #333333;
+
+  --font-sans: "Roboto", system-ui, sans-serif;
+  --font-mono: "Roboto Mono", ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  cursor: none;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: none;
+}
+
+a, button {
+  cursor: none;
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+/* ── Smooth Scroll Container ── */
+.smooth-scroll {
+  will-change: transform;
+}
+
+/* ── Text Reveal Animation ── */
+.text-reveal {
+  overflow: hidden;
+}
+
+.text-reveal-inner {
+  display: inline-block;
+  transform: translateY(100%);
+}
+
+/* ── Magnetic Button ── */
+.magnetic-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── Project Image Reveal ── */
+.project-image-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.project-image-wrapper img {
+  transform: scale(1.2);
+  transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.project-image-wrapper:hover img {
+  transform: scale(1);
+}
+
+/* ── Marquee ── */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.marquee-track {
+  animation: marquee 25s linear infinite;
+}
+
+.marquee-track-reverse {
+  animation: marquee-reverse 25s linear infinite;
+}
+
+/* ── Marquee fade edges ── */
+.marquee-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+/* ── Horizontal Rule ── */
+.hr-animated {
+  height: 1px;
+  background: var(--color-border-light);
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+/* ── Nav Menu Overlay ── */
+.nav-overlay {
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  transition: clip-path 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.nav-overlay.open {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/* ── Split text character spans ── */
+.char-span {
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── Link hover underline ── */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ── Footer massive name ── */
+.footer-name-wrapper {
+  overflow: hidden;
+  line-height: 0;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 50%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 50%);
+}
+
+.footer-name {
+  font-size: clamp(4rem, 16vw, 18rem);
+  line-height: 0.8;
+  padding-bottom: 0;
+  margin-bottom: -0.06em; /* pull descenders flush to bottom edge */
+}
