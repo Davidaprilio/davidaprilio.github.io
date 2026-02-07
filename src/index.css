@@ -160,15 +160,26 @@ a, button {
 .footer-name-wrapper {
   overflow: hidden;
   line-height: 0;
+  padding-inline: 1.5rem;
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 50%);
   mask-image: linear-gradient(to bottom, transparent 0%, black 50%);
 }
 
 .footer-name {
-  font-size: clamp(4rem, 16vw, 18rem);
+  font-size: clamp(4rem, 15vw, 18rem);
   line-height: 0.8;
+  white-space: nowrap;
+  width: 100%;
   padding-bottom: 0;
   margin-bottom: -0.06em; /* pull descenders flush to bottom edge */
+}
+
+@media (max-width: 767px) {
+  .footer-name {
+    font-size: 18vw;
+    width: 80vw;
+    margin-inline: auto;
+  }
 }
 
 /* ── Lazy Image Shimmer ── */
