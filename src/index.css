@@ -98,6 +98,11 @@ a, button {
   animation: marquee-reverse 25s linear infinite;
 }
 
+.marquee-row:hover .marquee-track,
+.marquee-row:hover .marquee-track-reverse {
+  animation-play-state: paused;
+}
+
 /* ── Marquee fade edges ── */
 .marquee-fade {
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
