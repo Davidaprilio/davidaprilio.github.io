@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="manifest" href="/manifest.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>David Aprilio — Full-Stack Engineer</title>
     <meta name="description" content="David Aprilio's personal portfolio website showcasing projects, skills, and experience as a Full-Stack Engineer." />
@@ -19,6 +20,15 @@
           window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
         }
       }(window.location))
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SB222ZGC74"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-SB222ZGC74');
     </script>
   </head>
   <body>
